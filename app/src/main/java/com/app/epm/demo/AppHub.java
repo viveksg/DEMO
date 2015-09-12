@@ -356,7 +356,7 @@ public class AppHub extends FragmentActivity implements OnItemSelectedListener, 
             tv2.setTextColor(Color.WHITE);
             trow[i].addView(tv1);
             trow[i].addView(tv2);
-            trow[i].setTag("" + i);
+            trow[i].setTag("" + present[st + i]);
             trow[i].setBackgroundColor(colors[i % 2]);
             trow[i].setOnClickListener(new OnClickListener() {
 
