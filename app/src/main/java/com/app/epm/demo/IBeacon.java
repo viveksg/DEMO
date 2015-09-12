@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -28,26 +31,40 @@ class BeaconElement {
         this.message = msg;
         this.type = tp;
     }
+
+    public String getMessage() {
+        return message;
+    }
 }
 
-public class IBeacon extends Activity {
+public class IBeacon extends FragmentActivity implements ListView.OnItemClickListener {
     Activity act = null;
     JSONArray ibeaconar = null;
-    BeaconElement bel[] = null;
-    ListView lsv = null;
+    BeaconElement beaconelement[] = null;
+    ListView minorlist = null;
     BecAdapt adapt = null;
-    String sar[] = null;
+    String adapterarray[] = null;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.ibec);
         act = this;
-        lsv = (ListView) findViewById(R.id.becl);
+        minorlist = (ListView) findViewById(R.id.becl);
+        minorlist.setOnItemClickListener(this);
         NetTask nts = new NetTask();
         Void dem = null;
         nts.execute(dem);
 
+    }
+
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Bundle messagebundle = new Bundle();
+        messagebundle.putString(MessageFragment.MESSAGE, beaconelement[position].getMessage());
+        MessageFragment messagefrag = new MessageFragment();
+        messagefrag.setArguments(messagebundle);
+        messagefrag.show(getSupportFragmentManager(), "Message" + System.currentTimeMillis());
     }
 
     class NetTask extends AsyncTask<Void, Void, Void> {
@@ -77,8 +94,8 @@ public class IBeacon extends Activity {
                 }
                 JSONObject jobject = new JSONObject(s2);
                 ibeaconar = jobject.getJSONArray("beaconList");
-                bel = new BeaconElement[ibeaconar.length()];
-                sar = new String[ibeaconar.length()];
+                beaconelement = new BeaconElement[ibeaconar.length()];
+                adapterarray = new String[ibeaconar.length()];
                 int i = 0, j = 0, k = 0;
                 JSONObject jtemp = null;
                 String stemp = "";
@@ -87,8 +104,8 @@ public class IBeacon extends Activity {
                     stemp = jtemp.getString("id");
                     stemp = stemp.substring(stemp.lastIndexOf("_") + 1);
                     Log.v("OUTPUT", i + " " + stemp);
-                    bel[i] = new BeaconElement(stemp, jtemp.getString("beaconMsg"), jtemp.getInt("beaconType"));
-                    sar[i] = stemp;
+                    beaconelement[i] = new BeaconElement(stemp, jtemp.getString("beaconMsg"), jtemp.getInt("beaconType"));
+                    adapterarray[i] = stemp;
                 }
 
 
@@ -102,8 +119,8 @@ public class IBeacon extends Activity {
 
         @Override
         public void onPostExecute(Void v) {
-            adapt = new BecAdapt(act, R.layout.listitem, sar);
-            lsv.setAdapter(adapt);
+            adapt = new BecAdapt(act, R.layout.listitem, adapterarray);
+            minorlist.setAdapter(adapt);
             pg.dismiss();
 
 
