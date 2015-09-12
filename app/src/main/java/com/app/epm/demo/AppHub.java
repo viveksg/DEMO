@@ -44,6 +44,7 @@ class Appdata {
     public long tstamp;
 
 
+
     public Appdata(JSONObject jso) {
         try {
             this.name = jso.getString("name");
@@ -88,7 +89,7 @@ public class AppHub extends FragmentActivity implements OnItemSelectedListener, 
     int complete = 0;
     int colors[] = new int[2];
     RelativeLayout relayout;
-    Button close = null;
+    Button close = null, becop = null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -159,8 +160,23 @@ public class AppHub extends FragmentActivity implements OnItemSelectedListener, 
                 finish();
             }
         });
-        nettasks = new NetTasks();
-        nettasks.execute(vd);
+        becop = (Button) findViewById(R.id.beacon);
+        becop.setText("OPEN BEACON ACT");
+        becop.setTextColor(Color.WHITE);
+        becop.setBackgroundColor(Color.parseColor("#A357DE"));
+        becop.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        becop.setGravity(Gravity.CENTER);
+        becop.setTypeface(null, Typeface.BOLD);
+        becop.setOnClickListener(new OnClickListener() {
+
+            public void onClick(View v) {
+                Intent intent = new Intent(AppHub.this, IBeacon.class);
+                startActivity(intent);
+            }
+
+        });
+        //nettasks = new NetTasks();
+        //nettasks.execute(vd);
 
     }
 

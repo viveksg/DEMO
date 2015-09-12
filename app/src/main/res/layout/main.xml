@@ -83,6 +83,13 @@
             android:layout_below="@+id/ll2"
             android:layout_centerHorizontal="true" />
 
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/beacon"
+            android:layout_below="@+id/bok"
+            android:layout_centerHorizontal="true" />
+
     </RelativeLayout>
 </ScrollView>
 
