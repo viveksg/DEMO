@@ -3,6 +3,7 @@ package com.app.epm.demo;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,12 @@ import android.widget.TextView;
 public class BecAdapt extends ArrayAdapter<String> {
 
     Context context;
-    String data[] = null;
+    String minordata[] = null;
 
-    public BecAdapt(Context cont, int rid, String vals[]) {
-        super(cont, rid, vals);
+    public BecAdapt(Context cont, int rid, String minorvals[]) {
+        super(cont, rid, minorvals);
         this.context = cont;
-        this.data = vals;
+        this.minordata = minorvals;
 
     }
 
@@ -29,9 +30,10 @@ public class BecAdapt extends ArrayAdapter<String> {
         LayoutInflater linf = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = linf.inflate(R.layout.listitem, bg, false);
         TextView temp = (TextView) view.findViewById(R.id.tv1);
-        temp.setText(data[pos]);
+        temp.setText(minordata[pos]);
         temp.setTextColor(Color.WHITE);
-        temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 17);
+        temp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        temp.setGravity(Gravity.CENTER);
         return view;
     }
 }

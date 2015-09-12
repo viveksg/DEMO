@@ -27,6 +27,7 @@ public class MessageFragment extends DialogFragment {
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         View view = linf.inflate(R.layout.messagelayout, vgroup);
         relayout = (RelativeLayout) view.findViewById(R.id.mesagerel);
+        relayout.setBackgroundColor(Color.parseColor("#1D7373"));
         messageview = (TextView) view.findViewById(R.id.messagetext);
         Bundle argbundle = getArguments();
         String message = argbundle.getString(MESSAGE);
@@ -35,6 +36,7 @@ public class MessageFragment extends DialogFragment {
         messageview.setTextColor(Color.WHITE);
         messageview.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         okay = (Button) view.findViewById(R.id.okay);
+        okay.setBackgroundColor(Color.parseColor("#006363"));
         okay.setText("OKAY");
         okay.setOnClickListener(new View.OnClickListener() {
 

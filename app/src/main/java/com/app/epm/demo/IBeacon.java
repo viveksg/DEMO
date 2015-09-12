@@ -2,12 +2,14 @@ package com.app.epm.demo;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -44,12 +46,15 @@ public class IBeacon extends FragmentActivity implements ListView.OnItemClickLis
     ListView minorlist = null;
     BecAdapt adapt = null;
     String adapterarray[] = null;
+    LinearLayout beaconlayout = null;
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.ibec);
         act = this;
+        beaconlayout = (LinearLayout) findViewById(R.id.ibeacon);
+        beaconlayout.setBackgroundColor(Color.parseColor("#009999"));
         minorlist = (ListView) findViewById(R.id.becl);
         minorlist.setOnItemClickListener(this);
         NetTask nts = new NetTask();
