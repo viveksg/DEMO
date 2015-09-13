@@ -114,9 +114,9 @@ public class IBeacon extends FragmentActivity implements ListView.OnItemClickLis
                 }
 
 
-            } catch (Exception rty) {
-                Log.v("EXCEPTION", s2 + "\n" + rty.getMessage());
-                rty.printStackTrace();
+            } catch (Exception exception) {
+                Log.v("EXCEPTION", s2 + "\n" + exception.getMessage());
+                exception.printStackTrace();
             }
             Log.v("OUPUT", s2);
             return null;
